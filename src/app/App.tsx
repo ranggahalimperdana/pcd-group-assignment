@@ -141,7 +141,12 @@ export default function App() {
         toast.success("Thresholding applied");
         break;
       case "edge":
-        result = applyEdgeDetection(originalImageData, selectedEdgeMethod);
+        // Pass threshold only if needed, or always? 
+        // Let's pass it if we want binary edges. For now let's pass it to allow adjustment.
+        // But the user might want soft edges.
+        // Let's add a "useThreshold" toggle or just use the threshold value.
+        // For simplicity, let's just pass it.
+        result = applyEdgeDetection(originalImageData, selectedEdgeMethod, threshold);
         toast.success(`Edge detection (${selectedEdgeMethod}) applied`);
         break;
     }
@@ -215,7 +220,7 @@ export default function App() {
           onUploadImage={handleUploadImage}
         />
       ) : (
-        <div className="flex-1 flex flex-col md:flex-row overflow-hidden">
+        <div className="flex-1 flex flex-col md:flex-row overflow-y-auto md:overflow-hidden">
           <ToolsSidebar
             onToolSelect={setSelectedTool}
             selectedTool={selectedTool}

@@ -206,6 +206,32 @@ export function PropertiesPanel({
                     </SelectContent>
                   </Select>
                 </div>
+
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <Label className="text-sm font-medium text-slate-700">Ambang Batas (Threshold)</Label>
+                    <Input
+                      type="number"
+                      value={threshold}
+                      onChange={(e) => onThresholdChange([Number(e.target.value)])}
+                      className="w-16 h-8 text-xs border-slate-200 focus:border-indigo-500"
+                      min={0}
+                      max={255}
+                    />
+                  </div>
+                  <Slider
+                    value={[threshold]}
+                    onValueChange={onThresholdChange}
+                    min={0}
+                    max={255}
+                    step={1}
+                    className="w-full"
+                  />
+                  <p className="text-xs text-slate-500">
+                    Atur nilai ambang batas untuk mendapatkan garis tepi yang lebih tegas (output biner).
+                  </p>
+                </div>
+
                 <div className="p-4 bg-slate-50 rounded-lg border border-slate-200">
                   <p className="text-sm text-slate-600">
                     {selectedEdgeMethod === "sobel" && "Sobel operator is excellent for detecting edges with noise reduction."}

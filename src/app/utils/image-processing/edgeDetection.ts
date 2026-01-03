@@ -1,4 +1,4 @@
-export const applyEdgeDetection = (imageData: ImageData, method: string): ImageData => {
+export const applyEdgeDetection = (imageData: ImageData, method: string, threshold?: number): ImageData => {
   const width = imageData.width;
   const height = imageData.height;
   const data = new Uint8ClampedArray(imageData.data);
@@ -45,8 +45,12 @@ export const applyEdgeDetection = (imageData: ImageData, method: string): ImageD
         const gy = p01 - p10;
 
         const magnitude = Math.sqrt(gx * gx + gy * gy);
-        const value = Math.min(255, magnitude);
+        let value = Math.min(255, magnitude);
         
+        if (threshold !== undefined) {
+          value = value >= threshold ? 255 : 0;
+        }
+
         output[idx] = value;
         output[idx + 1] = value;
         output[idx + 2] = value;
@@ -80,7 +84,12 @@ export const applyEdgeDetection = (imageData: ImageData, method: string): ImageD
         }
         
         const idx = (y * width + x) * 4;
-        const value = Math.min(255, magnitude);
+        let value = Math.min(255, magnitude);
+
+        if (threshold !== undefined) {
+          value = value >= threshold ? 255 : 0;
+        }
+
         output[idx] = value;
         output[idx + 1] = value;
         output[idx + 2] = value;
