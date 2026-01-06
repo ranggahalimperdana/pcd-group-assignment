@@ -131,6 +131,26 @@ export function HomePage({
             </div>
           </div>
         )}
+
+        {/* Footer Kelompok 3 */}
+        <div className="mt-24 pt-10 border-t border-slate-100">
+          <div className="text-center">
+            <p className="text-sm font-semibold text-indigo-600 mb-2 tracking-wide uppercase">Tim Pengembang</p>
+            <h3 className="text-xl font-bold text-slate-900 mb-8">Kelompok 3</h3>
+            
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 justify-center max-w-4xl mx-auto">
+              {["Imal", "Hammam", "Thyo", "Rangga", "Farrel"].map((member, index) => (
+                <div key={index} className="bg-slate-50 p-3 rounded-lg border border-slate-100 text-sm text-slate-700 font-medium hover:border-indigo-200 transition-colors">
+                  {member}
+                </div>
+              ))}
+            </div>
+
+            <p className="text-xs text-slate-400 mt-12">
+              © {new Date().getFullYear()} ImageFlow. Dibuat untuk memenuhi tugas Pemrosesan Citra Digital.
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );
