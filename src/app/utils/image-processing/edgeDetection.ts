@@ -1,5 +1,15 @@
-const BASE_URL = "http://127.0.0.1:8000";
+/* =========================================
+   EDGE DETECTION API (PRODUCTION READY)
+========================================= */
 
+/**
+ * URL backend Railway (LIVE)
+ * GANTI cuma di sini kalau backend pindah
+ */
+const BASE_URL =
+  "https://image-processing-backend-production-1fcd.up.railway.app";
+
+/* ===== TYPES ===== */
 export type EdgeMethod =
   | "sobel"
   | "prewitt"
@@ -9,7 +19,7 @@ export type EdgeMethod =
 
 /**
  * Apply edge detection via backend (ONE TIME)
- * Backend returns grayscale edge magnitude image (PNG)
+ * Backend returns grayscale PNG image
  */
 export async function applyEdgeDetection(
   imageFile: File,
@@ -24,7 +34,9 @@ export async function applyEdgeDetection(
   });
 
   if (!response.ok) {
-    throw new Error(`Edge detection failed: ${method}`);
+    throw new Error(
+      `Edge detection failed (${method}) - ${response.status}`
+    );
   }
 
   const blob = await response.blob();
@@ -32,7 +44,8 @@ export async function applyEdgeDetection(
 }
 
 /**
- * Convert backend PNG → ImageData (for Canvas)
+ * Convert backend PNG → ImageData
+ * Needed for Canvas rendering
  */
 async function blobToImageData(blob: Blob): Promise<ImageData> {
   const bitmap = await createImageBitmap(blob);
